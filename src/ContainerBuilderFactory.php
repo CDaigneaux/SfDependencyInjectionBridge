@@ -1,9 +1,11 @@
 <?php
 namespace SfDependencyInjectionBridge;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Loader\FileLoader;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Zend\ModuleManager\Module;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
@@ -12,47 +14,54 @@ class ContainerBuilderFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $container = new ContainerBuilder();
+        $loader    = new YamlFileLoader($container, new FileLocator());
 
         $moduleManager = $serviceLocator->get('ModuleManager');
-        foreach($moduleManager->getLoadedModules() as $module) {
-            $config = $module->getConfig();
-            if (isset($config['sf-dependency-injection'])) {
-                $this->loadSfDependencyInjectionConfig($container, $serviceLocator, $config['sf-dependency-injection']);
-            }
+
+        foreach ($moduleManager->getLoadedModules() as $module) {
+            $config = $this->loadModuleConfig($module);
+
+            $this->loadServiceLocatorConfig($container, $serviceLocator, $config['service-locator']);
+            $this->loadYamlConfigFiles($loader, $config['config-files']);
         }
 
         return $container;
     }
 
-    private function loadSfDependencyInjectionConfig(
-        ContainerBuilder $container,
-        ServiceLocatorInterface $serviceLocator,
-        array $config
-    )
+    private function loadModuleConfig(Module $module)
     {
-        if (isset($config['service-locator']) && is_array($config['service-locator'])) {
-            $this->loadServiceLocatorConfig($container, $serviceLocator, $config['service-locator']);
+        $moduleConfig = $module->getConfig();
+
+        $config = [];
+        if (isset($moduleConfig['sf-dependency-injection'])
+            && is_array($moduleConfig['sf-dependency-injection'])
+        ) {
+            $config = $moduleConfig['sf-dependency-injection'];
         }
-        if (isset($config['config-files']) && is_array($config['config-files'])) {
-            $this->loadYamlConfigFiles($container, $config['config-files']);
+
+        if (!isset($config['service-locator']) || !is_array($config['service-locator'])) {
+            $config['service-locator'] = [];
         }
+        if (!isset($config['config-files']) || !is_array($config['config-files'])) {
+            $config['config-files'] = [];
+        }
+
+        return $config;
     }
 
     private function loadServiceLocatorConfig(
         ContainerBuilder $container,
         ServiceLocatorInterface $serviceLocator,
         array $services
-    )
-    {
-        foreach($services as $id => $service) {
-            $container->set($id, $serviceLocator->get($service));
+    ) {
+        foreach ($services as $name => $service) {
+            $container->set($name, $serviceLocator->get($service));
         }
     }
 
-    private function loadYamlConfigFiles(ContainerBuilder $container, array $files)
+    private function loadYamlConfigFiles(FileLoader $loader, array $files)
     {
-        $loader = new YamlFileLoader($container, new FileLocator());
-        foreach($files as $file) {
+        foreach ($files as $file) {
             $loader->load($file);
         }
     }

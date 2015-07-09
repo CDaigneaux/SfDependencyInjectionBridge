@@ -22,7 +22,6 @@
         "symfony/config": "~2.7",
         "symfony/dependency-injection": "~2.7",
         "zendframework/zend-loader": "~2.5",
-        "zendframework/zend-mvc": "~2.5",
         "zendframework/zend-modulemanager": "~2.5",
         "zendframework/zend-servicemanager": "~2.5"
     },

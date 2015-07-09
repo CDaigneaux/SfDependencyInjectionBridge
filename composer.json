@@ -1,0 +1,37 @@
+{
+    "name": "cdaigneaux/sf-dependency-injection-bridge",
+    "description": "Symfony dependency injection bridge into ZF2",
+    "type": "library",
+    "keywords": [
+        "zf2", "symfony", "di", "dependency injection"
+    ],
+    "license": "MIT",
+    "homepage": "https://github.com/CDaigneaux/SfDependencyInjectionBridge",
+    "authors": [
+        {
+            "name": "Cyrille Daigneaux"
+        },
+        {
+            "name": "Nicolas Eeckeloo",
+            "email": "neeckeloo@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.5",
+        "symfony/config": "~2.7",
+        "symfony/dependency-injection": "~2.7"
+    },
+    "require-dev": {
+        "zendframework/zend-loader": "~2.5",
+        "zendframework/zend-mvc": "~2.5",
+        "zendframework/zend-modulemanager": "~2.5",
+        "zendframework/zend-servicemanager": "~2.5",
+        "phpunit/phpunit": "~4.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "SfDependencyInjectionBridge\\": "src/",
+            "SfDependencyInjectionBridgeTest\\": "tests/"
+        }
+    }
+}

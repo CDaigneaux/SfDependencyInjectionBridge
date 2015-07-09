@@ -5,7 +5,6 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\FileLoader;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
-use Zend\ModuleManager\Module;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
@@ -28,7 +27,7 @@ class ContainerBuilderFactory implements FactoryInterface
         return $container;
     }
 
-    private function loadModuleConfig(Module $module)
+    private function loadModuleConfig($module)
     {
         $moduleConfig = $module->getConfig();
 

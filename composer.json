@@ -9,7 +9,8 @@
     "homepage": "https://github.com/CDaigneaux/SfDependencyInjectionBridge",
     "authors": [
         {
-            "name": "Cyrille Daigneaux"
+            "name": "Cyrille Daigneaux",
+            "email": "cyrille.daigneaux@gmail.com"
         },
         {
             "name": "Nicolas Eeckeloo",

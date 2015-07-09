@@ -6,6 +6,7 @@ return [
         ],
         'factories' => [
             'SfDependencyInjectionBridge\\ContainerBuilder' => 'SfDependencyInjectionBridge\\ContainerBuilderFactory',
+            'SfDependencyInjectionBridge\\ModuleOptions'    => 'SfDependencyInjectionBridge\\ModuleOptionsFactory',
         ]
     ],
 ];

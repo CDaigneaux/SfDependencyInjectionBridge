@@ -1,6 +1,7 @@
 <?php
-namespace SfDependencyInjectionBridge;
+namespace SfDependencyInjectionBridgeTest;
 
+use SfDependencyInjectionBridge\AbstractFactory;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Zend\ServiceManager\ServiceLocatorInterface;
 

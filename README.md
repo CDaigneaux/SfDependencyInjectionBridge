@@ -36,7 +36,7 @@ application's configuration:
 Configuration
 -------------
 
-This module load each module configuration files to search the `sf-dependency-injection-bridge` key.
+This module load each module configuration files to search the `sf_dependency_injection_bridge` key.
 To add an dependency you should set in the module configuration file:
 
 ```php

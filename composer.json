@@ -1,5 +1,5 @@
 {
-    "name": "cdaigneaux/sf-dependency-injection-bridge",
+    "name": "cdx/sf-dependency-injection-bridge",
     "description": "Symfony dependency injection bridge into ZF2",
     "type": "library",
     "keywords": [

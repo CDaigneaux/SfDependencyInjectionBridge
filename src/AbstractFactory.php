@@ -8,13 +8,16 @@ class AbstractFactory implements AbstractFactoryInterface
 {
     public function canCreateServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
     {
-        $container = $serviceLocator->get('SfDependencyInjectionBridge\\ContainerBuilder');
-        return $container->has($requestedName);
+        return $this->getContainerBuilder($serviceLocator)->has($requestedName);
     }
 
     public function createServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
     {
-        $container = $serviceLocator->get('SfDependencyInjectionBridge\\ContainerBuilder');
-        return $container->get($requestedName);
+        return $this->getContainerBuilder($serviceLocator)->get($requestedName);
+    }
+    
+    private function getContainerBuilder(ServiceLocatorInterface $serviceLocator)
+    {
+        return $serviceLocator->get('SfDependencyInjectionBridge\\ContainerBuilder');
     }
 }

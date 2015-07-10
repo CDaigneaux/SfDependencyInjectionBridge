@@ -14,12 +14,12 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface
 
     public function getAutoloaderConfig()
     {
-        return array(
-            StandardAutoloader::class => array(
-                'namespaces' => array(
+        return [
+            StandardAutoloader::class => [
+                'namespaces' => [
                     __NAMESPACE__ => __DIR__ . '/src/',
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
     }
 }

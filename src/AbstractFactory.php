@@ -1,5 +1,5 @@
 <?php
-namespace SfDependencyInjectionBridge;
+namespace Cdx\SfDependencyInjectionBridge;
 
 use Zend\ServiceManager\AbstractFactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -18,6 +18,6 @@ class AbstractFactory implements AbstractFactoryInterface
     
     private function getContainerBuilder(ServiceLocatorInterface $serviceLocator)
     {
-        return $serviceLocator->get('SfDependencyInjectionBridge\\ContainerBuilder');
+        return $serviceLocator->get('Cdx\\SfDependencyInjectionBridge\\ContainerBuilder');
     }
 }

@@ -1,5 +1,5 @@
 <?php
-namespace SfDependencyInjectionBridge;
+namespace Cdx\SfDependencyInjectionBridge;
 
 use Zend\Stdlib\AbstractOptions;
 

@@ -1,7 +1,7 @@
 <?php
-namespace SfDependencyInjectionBridge;
+namespace Cdx\SfDependencyInjectionBridge;
 
-use SfDependencyInjectionBridge\ModuleOptions;
+use Cdx\SfDependencyInjectionBridge\ModuleOptions;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Loader\DelegatingLoader;
 use Symfony\Component\Config\Loader\Loader;

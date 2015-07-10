@@ -1,8 +1,8 @@
 <?php
-namespace SfDependencyInjectionBridgeTest;
+namespace Cdx\SfDependencyInjectionBridgeTest;
 
-use SfDependencyInjectionBridge\ContainerBuilderFactory;
-use SfDependencyInjectionBridge\ModuleOptions;
+use Cdx\SfDependencyInjectionBridge\ContainerBuilderFactory;
+use Cdx\SfDependencyInjectionBridge\ModuleOptions;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Zend\ServiceManager\ServiceLocatorInterface;
 

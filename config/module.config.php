@@ -2,11 +2,11 @@
 return [
     'service_manager' => [
         'abstract_factories' => [
-            'SfDependencyInjectionBridge\\AbstractFactory',
+            'Cdx\\SfDependencyInjectionBridge\\AbstractFactory',
         ],
         'factories' => [
-            'SfDependencyInjectionBridge\\ContainerBuilder' => 'SfDependencyInjectionBridge\\ContainerBuilderFactory',
-            'SfDependencyInjectionBridge\\ModuleOptions'    => 'SfDependencyInjectionBridge\\ModuleOptionsFactory',
+            'Cdx\\SfDependencyInjectionBridge\\ContainerBuilder' => 'Cdx\\SfDependencyInjectionBridge\\ContainerBuilderFactory',
+            'Cdx\\SfDependencyInjectionBridge\\ModuleOptions'    => 'Cdx\\SfDependencyInjectionBridge\\ModuleOptionsFactory',
         ]
     ],
 ];

@@ -1,7 +1,7 @@
 <?php
-namespace SfDependencyInjectionBridgeTest;
+namespace Cdx\SfDependencyInjectionBridgeTest;
 
-use SfDependencyInjectionBridge\AbstractFactory;
+use Cdx\SfDependencyInjectionBridge\AbstractFactory;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
@@ -74,7 +74,7 @@ class AbstractFactoryTest extends \PHPUnit_Framework_TestCase
         $serviceLocator = $this->getMock(ServiceLocatorInterface::class);
         $serviceLocator
             ->method('get')
-            ->with('SfDependencyInjectionBridge\\ContainerBuilder')
+            ->with('Cdx\\SfDependencyInjectionBridge\\ContainerBuilder')
             ->will($this->returnValue($containerBuilder));
         return $serviceLocator;
     }

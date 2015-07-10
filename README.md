@@ -44,12 +44,12 @@ return array (
     'router' => /* ... */
     'service_manager' => /* ... */
     /* ... */
-    'sf-dependency-injection-bridge' => [
-        'config-files' => [
+    'sf_dependency_injection_bridge' => [
+        'config_files' => [
             __DIR__ . '/services.yml',
             /* ... */
         ],
-        'service-locator' => [
+        'service_locator_mapping' => [
             'Doctrine\\ORM\\EntityManager' => 'Doctrine\\ORM\\EntityManager',
             /* ... */
         ]

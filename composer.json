@@ -31,12 +31,12 @@
     },
     "autoload": {
         "psr-4": {
-            "SfDependencyInjectionBridge\\": "src/"
+            "Cdx\\SfDependencyInjectionBridge\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "SfDependencyInjectionBridgeTest\\": "tests/"
+            "Cdx\\SfDependencyInjectionBridgeTest\\": "tests/"
         }
     }
 }

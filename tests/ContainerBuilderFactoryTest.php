@@ -58,6 +58,9 @@ class ContainerBuilderFactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function createService_WithConfigFile_ShouldLoadConfig()
     {
+        $serviceClass  = 'ServiceTest';
+        $this->getMock($serviceClass);
+
         $moduleOptions = new ModuleOptions([
             'config_files' => [
                 __DIR__ . '/_files/config.yml',
@@ -72,8 +75,8 @@ class ContainerBuilderFactoryTest extends \PHPUnit_Framework_TestCase
             ]));
 
         $this->assertInstanceOf(
-            ModuleOptions::class,
-            $this->getContainerBuilder($serviceLocator)->get('options')
+            $serviceClass,
+            $this->getContainerBuilder($serviceLocator)->get('foo')
         );
     }
 

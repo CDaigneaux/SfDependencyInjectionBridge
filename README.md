@@ -1,6 +1,8 @@
 Sf Dependency Injection Bridge
 ==============================
 
+[![Build Status](https://travis-ci.org/CDaigneaux/SfDependencyInjectionBridge.svg?branch=master)](https://travis-ci.org/CDaigneaux/SfDependencyInjectionBridge)
+
 Zf2 module to use Symfony Dependency Injection
 ([symfony/dependency-injection](https://github.com/symfony/DependencyInjection)).
 

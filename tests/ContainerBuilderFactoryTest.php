@@ -44,12 +44,36 @@ class ContainerBuilderFactoryTest extends \PHPUnit_Framework_TestCase
             ->method('get')
             ->will($this->returnValueMap([
                 [ModuleOptions::class, $moduleOptions],
-                [$zfServiceName, $serviceString]
+                [$zfServiceName, $serviceString],
             ]));
 
         $this->assertSame(
             $serviceString,
             $this->getContainerBuilder($serviceLocator)->get($sfServiceName)
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function createService_WithConfigFile_ShouldLoadConfig()
+    {
+        $moduleOptions = new ModuleOptions([
+            'config_files' => [
+                __DIR__ . '/_files/config.yml',
+            ],
+        ]);
+
+        $serviceLocator = $this->getServiceLocator();
+        $serviceLocator
+            ->method('get')
+            ->will($this->returnValueMap([
+                [ModuleOptions::class, $moduleOptions],
+            ]));
+
+        $this->assertInstanceOf(
+            ModuleOptions::class,
+            $this->getContainerBuilder($serviceLocator)->get('options')
         );
     }
 

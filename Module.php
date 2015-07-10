@@ -1,5 +1,5 @@
 <?php
-namespace SfDependencyInjectionBridge;
+namespace Cdx\SfDependencyInjectionBridge;
 
 use Zend\Loader\StandardAutoloader;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;

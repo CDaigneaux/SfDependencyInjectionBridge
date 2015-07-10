@@ -4,9 +4,9 @@ namespace SfDependencyInjectionBridge;
 use SfDependencyInjectionBridge\ModuleOptions;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Loader\DelegatingLoader;
+use Symfony\Component\Config\Loader\Loader;
 use Symfony\Component\Config\Loader\LoaderResolver;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Loader\FileLoader;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Zend\ServiceManager\FactoryInterface;
@@ -55,7 +55,7 @@ class ContainerBuilderFactory implements FactoryInterface
         }
     }
 
-    private function loadConfigFiles(FileLoader $loader, array $files)
+    private function loadConfigFiles(Loader $loader, array $files)
     {
         foreach ($files as $file) {
             $loader->load($file);

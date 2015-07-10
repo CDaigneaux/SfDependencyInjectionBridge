@@ -2,8 +2,8 @@
 namespace SfDependencyInjectionBridgeTest;
 
 use SfDependencyInjectionBridge\ContainerBuilderFactory;
+use SfDependencyInjectionBridge\ModuleOptions;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Zend\ModuleManager\ModuleManager;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 class ContainerBuilderFactoryTest extends \PHPUnit_Framework_TestCase
@@ -13,18 +13,16 @@ class ContainerBuilderFactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function createService_ShouldReturnInstanceOfContainerBuilder()
     {
-        $moduleManager = $this->getModuleManager();
-        $moduleManager
-            ->method('getLoadedModules')
-            ->will($this->returnValue([]));
-        
         $serviceLocator = $this->getServiceLocator();
         $serviceLocator
             ->method('get')
-            ->with('ModuleManager')
-            ->will($this->returnValue($moduleManager));
+            ->with(ModuleOptions::class)
+            ->willReturn(new ModuleOptions());
 
-        $this->assertInstanceOf(ContainerBuilder::class, $this->getContainerBuilder($serviceLocator));
+        $this->assertInstanceOf(
+            ContainerBuilder::class,
+            $this->getContainerBuilder($serviceLocator)
+        );
     }
 
     /**
@@ -32,35 +30,27 @@ class ContainerBuilderFactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function createService_WithExistingService_ShouldGetTheServiceSetted()
     {
-        $module = $this->getModule([
-            'sf-dependency-injection' => [
-                'service-locator' => [
-                    'ServiceTest' => 'ServiceTestInServiceLocator'
-                ]
-            ]
+        $sfServiceName = 'ServiceTest';
+        $zfServiceName = 'ServiceTestInServiceLocator';
+        $moduleOptions = new ModuleOptions([
+            'service_locator_mapping' => [
+                $sfServiceName => $zfServiceName,
+            ],
         ]);
-        $moduleManager = $this->getModuleManager();
-        $moduleManager
-            ->method('getLoadedModules')
-            ->will($this->returnValue([$module]));
 
         $serviceString  = 'This is a test service in the service locator';
         $serviceLocator = $this->getServiceLocator();
         $serviceLocator
             ->method('get')
             ->will($this->returnValueMap([
-                ['ModuleManager', $moduleManager],
-                ['ServiceTestInServiceLocator', $serviceString]
+                [ModuleOptions::class, $moduleOptions],
+                [$zfServiceName, $serviceString]
             ]));
 
-        $this->assertSame($serviceString, $this->getContainerBuilder($serviceLocator)->get('ServiceTest'));
-    }
-
-    private function getModuleManager()
-    {
-        return $this->getMockBuilder(ModuleManager::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $this->assertSame(
+            $serviceString,
+            $this->getContainerBuilder($serviceLocator)->get($sfServiceName)
+        );
     }
 
     private function getServiceLocator()
@@ -72,14 +62,5 @@ class ContainerBuilderFactoryTest extends \PHPUnit_Framework_TestCase
     {
         $containerBuilderFactory = new ContainerBuilderFactory();
         return $containerBuilderFactory->createService($serviceLocator);
-    }
-
-    private function getModule(array $config)
-    {
-        $moduleTest = $this->getMock('Module', ['getConfig']);
-        $moduleTest
-            ->method('getConfig')
-            ->will($this->returnValue($config));
-        return $moduleTest;
     }
 }
